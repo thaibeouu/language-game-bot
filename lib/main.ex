@@ -20,9 +20,9 @@ defmodule App do
 
   @impl true
   def start(_type, _args) do
-    :ets.new(:dicts, [:set, :public, :named_table])
-    :ets.new(:states, [:set, :public, :named_table])
-    :ets.new(:scores, [:set, :public, :named_table])
+    :ets.new(:dicts, [:set, :public, :named_table, read_concurrency: true, write_concurrency: true])
+    :ets.new(:states, [:set, :public, :named_table, read_concurrency: true, write_concurrency: true])
+    :ets.new(:scores, [:set, :public, :named_table, read_concurrency: true, write_concurrency: true])
     BotSupervisor.start_link(name: BotSupervisor)
   end
 end

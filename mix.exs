@@ -29,7 +29,8 @@ defmodule ExampleSupervisor.MixProject do
   defp deps do
     [
       {:nostrum, git: "https://github.com/Kraigie/nostrum.git"},
-      {:memoize, "~> 1.3"}
+      {:memoize, "~> 1.3"},
+      {:mutex, "~> 1.3"}
     ]
   end
 end
