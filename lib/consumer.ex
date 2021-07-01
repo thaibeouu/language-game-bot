@@ -27,6 +27,12 @@ defmodule BotConsumer do
       content == "::ping" ->
         Api.create_message(cid, "PONG!")
 
+      content == "::help" ->
+        Api.create_message!(
+          cid,
+          "Commands list:\n`::join`\n`::leave`\n`::score`\n\nNo data will be persisted once the bot restarts."
+        )
+
       content == "::score" ->
         scores_table = :ets.lookup(:scores, cid)
         {_, current_scores} = (scores_table != [] && List.first(scores_table)) || {nil, []}
@@ -38,7 +44,7 @@ defmodule BotConsumer do
               "#{user.username} \t #{elem(x, 1)} \n"
             end)
 
-          Api.create_message!(cid, "```console\n#{Enum.join(mapped_scores, "")}\n```")
+          Api.create_message!(cid, "```\n#{Enum.join(mapped_scores, "")}\n```")
         else
           Api.create_message!(cid, "No scores yet.")
         end
